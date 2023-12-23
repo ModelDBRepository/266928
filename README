@@ -1,0 +1,43 @@
+This is the README file for the script to perform simulations of the bleaching protocol from:
+
+Denizot, A., M. Arizono, U. V. Nägerl, H. Berry, & E. De Schutter. Control of Ca2+ signals by astrocyte nanoscale morphology at tripartite synapses, Glia, Sep. 2022, doi: 10.1002/glia.24258
+
+This model requires STEPS software, which is freely available at http://steps.sourceforge.net/STEPS/default.php
+
+
+HOW TO RUN THE CODE 
+-----------
+First, you need to download STEPS at http://steps.sourceforge.net/STEPS/default.php or directly at https://github.com/CNS-OIST/STEPS
+Dependencies for STEPS are described on the README file at https://github.com/CNS-OIST/STEPS. 
+
+The model requires that the following packages are installed:
+- numpy
+- pickle
+- sys
+- pyqtgraph
+
+The model is divided in 2 python files:
+
+****
+ip3r_model_mesh.py 
+This file contains 2 functions:
+- getModel(), that defines all molecules, reactions, reaction constants involved in the model
+- gen_geom(), that imports the geometry from the meshes "5nodes_ratio1.inp", "5nodes_ratio1.inp" and "5nodes_ratio1.inp", which correspond to astrocytic branchlets with shaft width of d0, d0/2 and d0/3, respectively. 
+
+****
+3d_bleaching.py 
+This file sets initial conditions and runs the simulation while recording data in a file. Bleaching occurs at t=1000 ms.
+To run this script, simply call the function with python with an integer i as an argument that will be the seed for the given simulation as well as the name of the mesh file 'filename'. The output file, out.filename.i', contains in each line the number of fluorescing ZSGreen molecules in the region to be bleached (left) and in the central node (right). Time between two lines corresponds to 3.6 ms, to fit experimental data, but can be manually changed by the user at line 12.
+
+Example command:
+python 3d_bleaching.py 1 5nodes_ratio3.inp
+
+
+MESH FILES
+-----------
+"5nodes_ratio1.inp", "5nodes_ratio1.inp" and "5nodes_ratio1.inp" correspond to astrocytic branchlets with shaft width of d0, d0/2 and d0/3
+
+
+CONTACT
+-----------
+audrey.denizot3@oist.jp
